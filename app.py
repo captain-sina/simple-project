@@ -1,12 +1,11 @@
-from flask import Flask, request, make_response, redirect, abort
+from flask import Flask, request, make_response, redirect, abort, render_template
 app = Flask(__name__)
 
 @app.route('/spidersite/user/<name>')
-def first(name):
-    if not name:
+def first(user):
+    if not user:
         abort(404)
-    user_agent = request.headers.get("User_agent")
-    return f"<h2>{name}' profile</h2>\n<h6>browser{user_agent}"
+    return render_template("user.html", name=user)
 
 @app.route('/spidersite')
 def main():
